@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/rohimihsan/auth-sys/controllers"
+	"github.com/rohimihsan/go-auth-jwt/controllers"
 )
 
 func main() {

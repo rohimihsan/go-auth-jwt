@@ -2,8 +2,11 @@ package controllers
 
 import (
 	"encoding/json"
+	"math/rand"
 	"net/http"
 	"time"
+
+	"golang.org/x/crypto/bcrypt"
 
 	"github.com/dgrijalva/jwt-go"
 )
@@ -127,12 +130,12 @@ func RefreshToken(w http.ResponseWriter, r *http.Request) {
 }
 
 //utility
-func HashPassword(password String) (string, error) {
+func HashPassword(password string) (string, error) {
 	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
 	return string(bytes), err
 }
 
-func CheckPasswordHash(password, hash String) bool {
+func CheckPasswordHash(password, hash string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
 	return err == nil
 }
@@ -140,7 +143,7 @@ func CheckPasswordHash(password, hash String) bool {
 func RandString(n int) string {
 	const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-	b := make([]byte, n) 
+	b := make([]byte, n)
 	for i := range b {
 		b[i] = letterBytes[rand.Intn(len(letterBytes))]
 	}

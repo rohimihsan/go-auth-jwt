@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/rohimihsan/auth-sys/config/db"
+	"github.com/rohimihsan/go-auth-jwt/config/db"
 )
 
 func TestUp(w http.ResponseWriter, r *http.Request) {
