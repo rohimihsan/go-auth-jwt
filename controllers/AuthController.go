@@ -9,6 +9,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 
 	"github.com/dgrijalva/jwt-go"
+	"github.com/rohimihsan/go-auth-jwt/models"
 )
 
 var jwtKey = []byte("mEK8VICqacKS0Cy6Ga7vPb2g93SXVZIfsJzrWVQVH64MQRyizWyMGK2E2ugAJ6n")
@@ -18,19 +19,9 @@ var users = map[string]string{
 	"user2": "password2",
 }
 
-type Credentials struct {
-	Password string `json:"password"`
-	Username string `json:"username"`
-}
-
-type Claims struct {
-	Username string `json:"username"`
-	jwt.StandardClaims
-}
-
 //Login function
 func Login(w http.ResponseWriter, r *http.Request) {
-	var creds Credentials
+	var creds models.Credentials
 
 	err := json.NewDecoder(r.Body).Decode(&creds)
 
@@ -48,7 +39,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 	expirationTime := time.Now().Add(5 * time.Minute)
 
-	claims := &Claims{
+	claims := &models.Claims{
 		Username: creds.Username,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
@@ -89,7 +80,7 @@ func RefreshToken(w http.ResponseWriter, r *http.Request) {
 	}
 
 	tknStr := c.Value
-	claims := &Claims{}
+	claims := &models.Claims{}
 	tkn, err := jwt.ParseWithClaims(tknStr, claims, func(token *jwt.Token) (interface{}, error) {
 		return jwtKey, nil
 	})

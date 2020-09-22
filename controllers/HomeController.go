@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/dgrijalva/jwt-go"
+	"github.com/rohimihsan/go-auth-jwt/models"
 )
 
 //Home function
@@ -22,7 +23,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 	tknStr := c.Value
 
-	claims := &Claims{}
+	claims := &models.Claims{}
 
 	tkn, err := jwt.ParseWithClaims(tknStr, claims, func(token *jwt.Token) (interface{}, error) {
 		return jwtKey, nil
