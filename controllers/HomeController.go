@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -10,14 +11,22 @@ import (
 
 //Home function
 func Home(w http.ResponseWriter, r *http.Request) {
+	var res models.ResponseResult
+
 	// fmt.Fprint(w, "Welcome")
 	c, err := r.Cookie("token")
 	if err != nil {
 		if err == http.ErrNoCookie {
 			w.WriteHeader(http.StatusUnauthorized)
+
+			res.Result = "Unauthorized"
+			json.NewEncoder(w).Encode(res)
 			return
 		}
 		w.WriteHeader(http.StatusBadRequest)
+
+		res.Result = "Bad request"
+		json.NewEncoder(w).Encode(res)
 		return
 	}
 
@@ -32,6 +41,8 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		if err == jwt.ErrSignatureInvalid {
 			w.WriteHeader(http.StatusUnauthorized)
+			res.Result = "Unauthorized"
+			json.NewEncoder(w).Encode(res)
 			return
 		}
 		w.WriteHeader(http.StatusBadRequest)
@@ -40,6 +51,8 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 	if !tkn.Valid {
 		w.WriteHeader(http.StatusUnauthorized)
+		res.Result = "Unauthorized"
+		json.NewEncoder(w).Encode(res)
 		return
 	}
 

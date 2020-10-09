@@ -3,6 +3,7 @@ package controllers
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"math/rand"
 	"net/http"
 	"os/user"
@@ -86,6 +87,8 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		Value:   tokenString,
 		Expires: expirationTime,
 	})
+
+	w.Write([]byte(fmt.Sprint("Login succes")))
 }
 
 func Register(w http.ResponseWriter, r *http.Request) {
