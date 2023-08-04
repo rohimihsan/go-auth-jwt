@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         // Set Go workspace path (optional)
-        GOPATH = "${WORKSPACE}/go"
+        GOPATH = "ATH = '/usr/local/go/bin:$PATH"
     }
     
     stages {
