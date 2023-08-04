@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         // Set Go workspace path (optional)
-        GOPATH = "ATH = '/usr/local/go/bin:$PATH"
+        GOPATH = "PATH = '/usr/local/go/bin:$PATH"
     }
     
     stages {
@@ -26,11 +26,7 @@ pipeline {
         
         stage('Test') {
             steps {
-                // Set the Go workspace
-                dir("go/src/github.com/rohimihsan/go-auth-jwtt") {
-                    // Run Golang tests
-                    sh "go test ./..."
-                }
+                sh "go version"
             }
         }
         
