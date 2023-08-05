@@ -59,7 +59,7 @@ pipeline {
                 // For example, you can use SCP or SSH to copy the binary to a remote server
                 // sh "scp myapp user@your-server:/path/to/deploy/"
                 // Your test steps here
-                sh "./go-auth-jwt"
+                sh "./go-auth-jwt &"
             }
         }
     }
