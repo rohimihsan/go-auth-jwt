@@ -1,10 +1,10 @@
 pipeline {
     agent any
     
-    environment {
-        // Set Go workspace path (optional)
-        GOPATH = "PATH = '/usr/local/go/bin:$PATH"
-    }
+    // environment {
+    //     // Set Go workspace path (optional)
+    //     GOPATH = "PATH='/usr/local/go/bin:$PATH"
+    // }
     
     stages {        
         stage('Test') {
@@ -12,7 +12,7 @@ pipeline {
                 sh "go version"
             }
         }
-        
+
         stage('Build') {
             steps {
                 // Set the Go workspace
