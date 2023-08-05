@@ -18,8 +18,8 @@ pipeline {
                 // Set the Go workspace
                 // dir("go/src/github.com/your-username/your-golang-project") {
                     // Clean the workspace and build the Golang project
-                    sh "1.17.6 clean"
-                    sh "1.17.6 build -o myapp"
+                    sh "go clean"
+                    sh "go build -o myapp"
                 // }
             }
         }
@@ -29,7 +29,7 @@ pipeline {
                 // Set the Go workspace
                 // dir("go/src/github.com/your-username/your-golang-project") {
                     // Run Golang tests
-                    sh "1.17.6 version"
+                    sh "go version"
                 // }
             }
         }
@@ -39,7 +39,7 @@ pipeline {
                 // Here you can add steps to deploy your Golang application (e.g., copying to a server)
                 // For example, you can use SCP or SSH to copy the binary to a remote server
                 // sh "scp myapp user@your-server:/path/to/deploy/"
-                sh "1.17.6 run main.go"
+                sh "go run main.go"
             }
         }
     }
