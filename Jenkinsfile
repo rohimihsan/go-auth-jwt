@@ -55,11 +55,8 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // Here you can add steps to deploy your Golang application (e.g., copying to a server)
-                // For example, you can use SCP or SSH to copy the binary to a remote server
-                // sh "scp myapp user@your-server:/path/to/deploy/"
-                // Find and terminate the Go binary process
-                sh 'nohup ./go-auth-jwt > go-auth-jwt.log 2>&1 &'
+                echo "run"
+                sh "export JENKINS_NODE_COOKIE=dontKillMe; nohup ./go-auth-jwt > go-auth-jwt.log 2>&1 &"
             }
         }
     }
