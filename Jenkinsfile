@@ -28,28 +28,32 @@ pipeline {
                 // dir("go/src/github.com/your-username/your-golang-project") {
                     // Clean the workspace and build the Golang project
                     sh "go mod init go-auth-jwt"
-                    sh "go mod tidy"
+                    sh "go mod tidy"                   
                 // }
             }
         }
 
-        stage('Build') {
-            steps {
-                // Set the Go workspace
-                // dir("go/src/github.com/your-username/your-golang-project") {
-                    // Clean the workspace and build the Golang project
-                    sh "go clean"
-                    sh "go build -o myapp"
-                // }
-            }
-        }
+        // stage('Build') {
+        //     steps {
+        //         // Set the Go workspace
+        //         // dir("go/src/github.com/your-username/your-golang-project") {
+        //             // Clean the workspace and build the Golang project
+                    
+        //             sh "go clean"
+        //             sh "go build -o myapp"
+        //         // }
+        //     }
+        // }
 
         stage('Deploy') {
             steps {
                 // Here you can add steps to deploy your Golang application (e.g., copying to a server)
                 // For example, you can use SCP or SSH to copy the binary to a remote server
                 // sh "scp myapp user@your-server:/path/to/deploy/"
-                sh "go run main.go"
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    // Your test steps here
+                    sh "go run main.go"
+                }
             }
         }
     }
