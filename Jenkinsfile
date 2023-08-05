@@ -6,27 +6,20 @@ pipeline {
         GOPATH = "PATH = '/usr/local/go/bin:$PATH"
     }
     
-    stages {
-        stage('Checkout') {
+    stages {        
+        stage('Test') {
             steps {
-                // Checkout the code from your Git repository
-                sh "ls -al ../"
+                sh "go version"
             }
         }
         
         stage('Build') {
             steps {
                 // Set the Go workspace
-                dir("go/src/github.com/rohimihsan/go-auth-jwt") {
+                // dir("go/src/github.com/rohimihsan/go-auth-jwt") {
                     // Build the Golang project
                     sh "go build -o go-auth-jwt"
-                }
-            }
-        }
-        
-        stage('Test') {
-            steps {
-                sh "go version"
+                // }
             }
         }
         
