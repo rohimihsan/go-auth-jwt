@@ -59,8 +59,6 @@ pipeline {
                 // For example, you can use SCP or SSH to copy the binary to a remote server
                 // sh "scp myapp user@your-server:/path/to/deploy/"
                 // Find and terminate the Go binary process
-                sh 'pkill -f go-auth-jwt'
-
                 sh "./go-auth-jwt &"
             }
         }
