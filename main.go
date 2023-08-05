@@ -22,5 +22,5 @@ func main() {
 	r.HandleFunc("/home", controllers.Home).Methods("GET")
 	r.HandleFunc("/refresh", controllers.RefreshToken).Methods("POST")
 
-	log.Fatal(http.ListenAndServe("127.0.0.1:8070", r))
+	log.Fatal(http.ListenAndServe(":8070", r))
 }
