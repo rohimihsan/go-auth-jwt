@@ -12,6 +12,26 @@ pipeline {
         //         checkout scm
         //     }
         // }
+        stage('Test') {
+            steps {
+                // Set the Go workspace
+                // dir("go/src/github.com/your-username/your-golang-project") {
+                    // Run Golang tests
+                    sh "go version"
+                // }
+            }
+        }
+
+        stage('Init') {
+            steps {
+                // Set the Go workspace
+                // dir("go/src/github.com/your-username/your-golang-project") {
+                    // Clean the workspace and build the Golang project
+                    sh "go mod init"
+                    sh "go mod tidy"
+                // }
+            }
+        }
 
         stage('Build') {
             steps {
@@ -20,16 +40,6 @@ pipeline {
                     // Clean the workspace and build the Golang project
                     sh "go clean"
                     sh "go build -o myapp"
-                // }
-            }
-        }
-
-        stage('Test') {
-            steps {
-                // Set the Go workspace
-                // dir("go/src/github.com/your-username/your-golang-project") {
-                    // Run Golang tests
-                    sh "go version"
                 // }
             }
         }
