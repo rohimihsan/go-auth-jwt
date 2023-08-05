@@ -42,7 +42,11 @@ pipeline {
                 // Set the Go workspace
                 // dir("go/src/github.com/your-username/your-golang-project") {
                     // Clean the workspace and build the Golang project
-                    
+                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                        sh 'go mod init go-auth-jwt'
+                        sh "go mod tidy"   
+                    }
+
                     sh "go clean"
                     sh "go build -o go-auth-jwt"
                 // }
